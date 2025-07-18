@@ -53,6 +53,7 @@ Read actual GitHub code where it's used
     - Methods
     - Class Members
     - Block
+- `Access Modifier` ke baare mein sab
 <br>
 <br>
 <br>
@@ -75,12 +76,14 @@ Read actual GitHub code where it's used
 
 # The 5 phases of JAVA prog
 
-1) Write a `.java` program.
+### 1) Start 
+* Write a `.java` program.
 _This is the source code_
 <br>
 
 
-2) **Compiler** compiles the java prog into bytecodes <br>_Simply, it work to make it platform independent_
+### 2) **Compiler**
+* Compiles the java prog into bytecodes <br>_Simply, it work to make it platform independent_
 `javac == java compiler`
     <br>
     ```
@@ -93,7 +96,8 @@ _This is the source code_
     * To compile the code we have to write `javac FileName.java`
 <br>
 
-3)  **Loader** is used to load the bytecode `.class` file into main memory (RAM)
+### 3)  **Loader** 
+* Is used to load the bytecode `.class` file into main memory (RAM)
     * It is done when we run the program `java FileName` 
   <br>
 
@@ -105,7 +109,7 @@ _This is the source code_
 
 * **Managing Dependencies** 
     * It means if
-  ![alt text](image.png) 
+  ![alt text](src/image.png) 
         * as here another class is called from `Hello class`
         * Then it finds `Greeter class` and then creates it also.
     * This means when we run prog then
@@ -117,13 +121,28 @@ _This is the source code_
     ``` 
     Managing Dependecy means it loads all the necessary classes on which the Main Class(which have main function) is dependent.
     ```
-    * Java uses dynamic class loading, meaning classes are loaded only when needed — it saves memory and speeds up launch.
+    
+* ##### JAVA Dynamic Class Loading
+    ```
+    -> Class tabhi load karta hai jab jarurat hai, otherwise nahi
+    -> Saves memory and speed ^
+    ```
 
-4) **Bytecode Verifier** verifies the bytecode for any error
+### 4) **Bytecode Verifier** 
+* Verifies the bytecode for any error
+* **Why we need it?**
+  * Ensures safety and prevent malicious or malformed code(mistakewala code)
+  * If the mistakewala code is runned it will crash the JVM
+  * ##### Crashing JVM
+    * Accessing private data
 
-5) **Execute** 
-    * JVM uses combination of _interpretation_ and _just-in-time compilation_ to **translate** bytecodes into machine language
-    * Application is runned on the user's machine(ie. by interpreter)
+    * Corrupting memory
+
+    * Violating access rules (private method ko call karna from different the class)
+
+### 5) **Execute** 
+* JVM uses combination of _interpretation_ and _just-in-time compilation_ to **translate** bytecodes into machine language
+* Application is runned on the user's machine(ie. by interpreter)
 
 
 <br>
@@ -199,6 +218,9 @@ The `static` means that the variable belongs to the class not to any object of t
 #### Static Block
 * Static block gets executed when the JVM loads the code.
 
+
+# Encapsulation/Abstraction
+* We achieve **Encapsulation** by making data members(instance variables) `private`.
 
 
 
