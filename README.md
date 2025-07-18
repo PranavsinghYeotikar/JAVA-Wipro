@@ -223,6 +223,17 @@ The `static` means that the variable belongs to the class not to any object of t
 * We achieve **Encapsulation** by making data members(instance variables) `private`.
 
 
+<br>
+<br>
+<br>
+
+# Inheritance
+#### 1) Single Inheritance
+    class derived_class extends base_class{
+
+    } 
+
+* `Constructor` of base class is never inherited by the derived class
 
 <br>
 <br>
@@ -243,3 +254,27 @@ The `static` means that the variable belongs to the class not to any object of t
 
 * **Dynamic Class Loading** 
 Java uses dynamic class loading, meaning classes are loaded only when needed — it saves memory and speeds up launch.
+
+<br>
+<br>
+<br>
+
+# Some Errors
+###  1) Static Declaration Error
+![alt text](src/image2.png) 
+* Here it is giving error for `b` object but not for `a` because `class A` is written static.
+* To resolve this error
+    ```
+    non-static variable this cannot be referenced from a static context(errors(1): 12:9-12:23)
+    No enclosing instance of type Inheritance1 is accessible. Must qualify the allocation with an enclosing instance of type Inheritance1 (e.g. x.new A() where x is an instance of Inheritance1).Java(16777237)
+    Inheritance1.​B
+* Write static in the class name as written for `public static class A`
+  
+  <br>
+  
+###  2) If we have to access a `private` member of the `base class` from derived class
+* Error looks like this
+        ![alt text](src/InheritanceError1.png)
+* then we have to create a public method in the base class which will return that private variable to the base class
+        ![alt text](src/InheritanceSolution1.png)
+* Here we wrote the function `getPocketMoney()` to return private variable `pocketMoney`.
