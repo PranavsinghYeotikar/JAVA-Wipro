@@ -104,7 +104,7 @@ _This is the source code_
     ```mermaid
     flowchart TD
     A[Run program] --> B[Find .class] --> C[Loads .class in RAM] --> D[Manages Dependencies]
-    ```
+    
 <br>
 
 * **Managing Dependencies** 
@@ -233,7 +233,12 @@ The `static` means that the variable belongs to the class not to any object of t
 
     } 
 
-* `Constructor` of base class is never inherited by the derived class
+* `Constructor` of base class is never inherited by the derived class.
+* **Order of Calling the classes**
+    ```mermaid
+    flowchart TD
+    A[Base Class] --> B[Derived Class]
+    ```
 
 <br>
 <br>
