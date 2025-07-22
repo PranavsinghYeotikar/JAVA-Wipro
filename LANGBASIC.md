@@ -560,8 +560,29 @@ Toh:
   * **Class** can be `public` or `default`, but members ka access tightly controlled hota hai
 
 ## 🧪 Use Cases
+* Banking apps: `private double balance;` – kisi ko bhi directly balance nahi dikhana
+* Medical records: sensitive data access restricted
+* Android/Java projects: model classes with encapsulation for API calls
 
+**Modules jahan chalta hai**:
+* User profile handling
+* Form validations
+* Data layer in any MVC/MVVM app
 
+## ⚠️ Common Pitfalls
+### Error
+  * `Getters/setters` likhna bhool jaate hain
+  * Sab kuch `public` kar dete hain (facepalm moment)
+  * **Circular call**: _setter ke andar galti se fir setter call kar diya_ → StackOverflowError
+
+## 🔎 Behind the Scenes
+* Compiler encapsulated fields ke liye direct access rokega agar wo private hain
+* Getters/setters ke bytecode mein normal method ban jaate hain
+
+## 💼 Interviews + Code Challenges
+* Difference between encapsulation & abstraction?
+* Can you make a class immutable using encapsulation?
+* Why fields should be private and methods public?
 
 
 <br>
@@ -764,4 +785,6 @@ Toh:
 <br>
 <br>
 Go to topic 
-encapsulation -> heap data structure -> final keyword
+heap data structure -> final keyword -> super keyword
+
+abstraction -> access modifier
