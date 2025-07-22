@@ -467,10 +467,10 @@ Kya ho raha hai?
   * Static, instance aur local variable mein kya difference hai?
   
   | Type     | Belongs To | Memory      | Lifetime                | Thread Safety              |
-| -------- | ---------- | ----------- | ----------------------- | -------------------------- |
-| Local    | Method     | Stack       | Method ke end tak       | Thread-safe (own stack)    |
-| Instance | Object     | Heap        | Object ke end tak       | Not thread-safe            |
-| Static   | Class      | Method Area | Entire program run-time | Not thread-safe by default |
+  | -------- | ---------- | ----------- | ----------------------- | -------------------------- |
+  | Local    | Method     | Stack       | Method ke end tak       | Thread-safe (own stack)    |
+  | Instance | Object     | Heap        | Object ke end tak       | Not thread-safe            |
+  | Static   | Class      | Method Area | Entire program run-time | Not thread-safe by default |
 
 
   🔹 Static variables kis memory mein store hote hain?
@@ -530,6 +530,37 @@ Toh:
   3) Return address (method ke baad kaha jaana hai)
 
 **Local variables are never shared between threads.**
+
+
+<br>
+<br>
+<br>
+
+# Encapsulation
+## 🌀 Definition
+* Encapsulation matlab _data aur code ko ek saath single unit mein lapet dena_.
+* Jaise **class ke andar variables (data) aur methods (logic) ek box mein band** ho jaate hain.
+
+  ### Why we need it?
+  * Taaki data secure rahe, direct access na mile. Sirf methods ke through hi data tak pahuch ho. Matlab, **data hiding ka kaam karta hai**.
+  
+  ### Help?
+  * **Changes sirf methods ke andar** kiye ja sakte hain, outside world ko farak nahi padta.
+  
+## 🧠 Memory Behavior
+* **_Fields_ heap** mein jaate hain (object ke saath)
+* **_Methods_ stack ya code segment mein** rehte hain
+* Encapsulation ka kaam compile-time structure se hota hai
+
+## 🛠️ How It Works 
+![alt text](src/encap.png)
+* #### Rules
+  * **Variables** mostly `private`
+  * **Access** via `public` getters/setters
+  * **Class** can be `public` or `default`, but members ka access tightly controlled hota hai
+
+## 🧪 Use Cases
+
 
 
 
@@ -601,13 +632,13 @@ Toh:
     * VM ne `this` ko **read-only reference** banaya hai — sirf use karo, modify mat karo
 
   ### 🧪 Use Cases
-  | Use Case                     | Example                           |
-| ---------------------------- | --------------------------------- |
-| 🔄 Variable conflict resolve | `this.name = name;`               |
-| 🔗 Method chaining           | `obj.setA().setB();`              |
-| 🧱 Constructor chaining      | `this("default");`                |
-| 📦 Pass current object       | `helper.update(this);`            |
-| 🎛️ Event Listener (GUI)     | `button.addActionListener(this);` |
+  | Use Case                    | Example                           |
+  | --------------------------- | --------------------------------- |
+  | 🔄 Variable conflict resolve | `this.name = name;`               |
+  | 🔗 Method chaining           | `obj.setA().setB();`              |
+  | 🧱 Constructor chaining      | `this("default");`                |
+  | 📦 Pass current object       | `helper.update(this);`            |
+  | 🎛️ Event Listener (GUI)      | `button.addActionListener(this);` |
 
 ### ⚠️ Common Pitfalls
 | Pitfall                                            | Problem             |
@@ -637,10 +668,100 @@ Toh:
 🔹 **How does this help in Builder Pattern?**
   > Each method returns `this`, so you can chain the next method on the same object.
 
+<br>
+<hr>
+<br>
+
+## `this()` keyword
+### 🌀 Definition
+* `this()` ek constructor call hai — iska use tab hota hai jab **ek constructor se dusre constructor ko call** karna ho **same class ke andar**. 
+* ##### 🔹 Kyu exist karta hai?
+  * Reusability ke liye!
+* ##### 🔹 Kaise help karta hai?
+  * Constructor chaining se: ek **constructor base logic kare, dusra kuch extra kaam add kare**. Hierarchy maintain rehti hai.
+
+### 🧠 Memory Behavior
+* We can run multiple constructor, but for that only one object will be created.
+
+![alt text](src/this.png)
+* when we `Student s = new Student();`
+* then
+  1. `Student()` chalega
+  2. Usme likha hai `this("Pranav")`, toh wo dusra constructor (`Student(String name)`) call karega
+  3. Wo `System.out.println("Name: " + name);` print karega
+  4. Phir wapas aake `System.out.println("No-arg constructor");` chalega
+* Jab hum `this()` ka use karte hain constructor ke andar, toh **multiple constructors chal sakte hain, lekin object ek hi baar banta hai.**
+
+### 🛠️ How It Works
+🔹 Syntax
+`this(<args>)`
+* ##### Rules
+  * Sirf constructor ke andar hi use ho sakta hai.
+  * Aur woh bhi first line pe — warna compile-time error aayega
+  * this() and super() dono ek saath nahi chalega — ek hi chalega first line mein
+
+### 🧪 Use Cases
+🔹 Constructor Chaining — ek constructor dusre ko call kare for code reuse
+
+🔹 Overloaded constructors ka common use
+
+![alt text](src/this2.png)
+
+
+### ⚠️ Common Pitfalls
+* `StackOverflowError?` Dekho kahin circular constructor call toh nahi
+  * `this()` ka infinite recursion kar dena (ek constructor dusre ko call kare, phir pehla fir se dusra... 😵)
+* IDE warnings ko lightly mat lena, especially constructor chaining mein
+
+### 🔎 Behind the Scenes
+* Compile time pe Java dekhta hai ki this() kis constructor ko call kar raha hai
+* Constructor chaining **single object** banane ka process hai
+
+### 💼 Interviews + Code Challenges
+🔹 **"What’s the difference between this and this()?"**
+  > this is used to refer the current object. Used to access method, var and pass current object as arguement.  
+  > this() is used to call constructor of the same class, or achieve constructor hierarchy
+
+🔹 **How does constructor chaining work in Java?**
+  > It is achieved by using `this()`, by calling one constructor from the other.
+
+  > It can be used in any constructor, not just non-parameterized. The only rule is: `this()` must be the first statement.
+
+  >Extra Tip:
+  For **parent class** constructor, we use `super()`
+  For **same class** constructor, we use `this()`
+
+🔹 **What happens if we don’t write this() in overloaded constructors?**
+  > Example without `this()`
+  ![alt text](src/this3.png)
+  Dekha? 👆 `this.name = name;` dono constructors mein likhna pad raha hai — duplicate code
+
+  >Ab soch — agar name ke saath 10 aur fields hote, toh sab jagah likhna padta!
+  Aur agar bhool gaya kisi constructor mein likhna, toh kya hoga?
+  💔 **Wrong Output / Missing Value**
+
+  > ✅ Now Same Code Using this() (Better Way):
+  ![alt text](src/this4.png)
+  🔁 Ab name set karne ka kaam sirf ek jagah ho raha hai: `Student(String name)` constructor mein
+  🔁 Dusre constructor mein usko `this(name)` se reuse kar liya.
+
+  > ⚠️ **Agar `this()` nahi likhte**:
+    1. Har constructor mein **alag se initialization likhna padta**
+    2. Bhool gaye toh variable assign hi nahi hoga
+    3. **Output galat** aayega ya kuch fields default value (like null or 0) le lenge
+
+🔹 **Can you use both super() and this() in same constructor?**
+  > No
+
+
+
+
+
+
 
 
 <br>
 <br>
 <br>
 Go to topic 
-this() -> method overloading -> encapsulation -> heap data structure -> final keyword
+encapsulation -> heap data structure -> final keyword
