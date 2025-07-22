@@ -40,7 +40,6 @@ Can you solve small-medium problems using this?
 🚀 8. Projects or Use in Real Code
 Build something small using that concept
 Read actual GitHub code where it's used
-🧠 Ex: Use interface to build a plugin system. Use abstract class for a base controller.
 ```
 
 <br>
