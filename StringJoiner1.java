@@ -1,3 +1,5 @@
+//add() method
+
 import java.util.StringJoiner;
 
 public class StringJoiner1{
