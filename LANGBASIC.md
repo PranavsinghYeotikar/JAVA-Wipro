@@ -310,7 +310,7 @@ Kya ho raha hai?
   * As each thread gets its separate copy of it. Because each thread has its own stack and local var are stored in stack.
 
 ### 🧠 Memory Behavior
-* Store hota hai stack memory mein
+* Store hota hai **stack memory** mein
 * Method call hote hi ban jaata hai, method finish hote hi ud jaata hai
 * JVM automatically manage karta hai (no need for cleanup)
 
@@ -327,9 +327,7 @@ Kya ho raha hai?
 
 ### 🔧 Under the scene
 * JVM har method ke liye stack frame banata hai
-
 * Us frame mein local variables ke liye slots allocate hote hain
-
 * Method finish → frame destroy → variables bhi vanish 💨
 
 ### 🧪 Use Case
@@ -343,7 +341,7 @@ Kya ho raha hai?
 
 ### ❌ Common Errors
   #### 1) Uninitialized Variable Error
-  * Initialize var every time we make it.
+  * **Initialize var every time** we make it.
   
   #### 2) Shadowing
   ```
@@ -370,10 +368,14 @@ Kya ho raha hai?
 1) Difference between local, instance, and static variables?
 
 2) Where are local variables stored in memory?
-
+  > In the stack memory
 3) Why can't we use access modifiers with local variables?
+  > Because `local var` are limited to method, and access modifiers are used for class level fields, so it is unnecessary to use them for `local var`.
 
-4) Can we return local variables from a method? (Yes, by value or reference)
+  > There visiblity is restricted to method only
+
+4) Can we return local variables from a method? 
+  > If you return a primitive local variable, its value is sent. If you return an object, its reference is sent. The local variable itself is deleted after the method ends
 
 ### 🌍 Real World Usage
 | Area          | Example                        | Local Variable Role        |
@@ -398,7 +400,6 @@ Kya ho raha hai?
   class MyClass {
     static int counter = 0;
   }
-
 #### ❓Why we need it?
 * Agar sabhi objects ko ek hi common value use karni ho — jaise counter, settings, ya interest rate — tab static variable best hota hai.
 
@@ -464,7 +465,7 @@ Kya ho raha hai?
 
 ## 💼 Interview + Code Challenges
 **Common Interview Qs:**
-  * Static, instance aur local variable mein kya difference hai?
+  * **Static, instance aur local variable mein kya difference hai?**
   
   | Type     | Belongs To | Memory      | Lifetime                | Thread Safety              |
   | -------- | ---------- | ----------- | ----------------------- | -------------------------- |
@@ -473,17 +474,17 @@ Kya ho raha hai?
   | Static   | Class      | Method Area | Entire program run-time | Not thread-safe by default |
 
 
-  🔹 Static variables kis memory mein store hote hain?
+  🔹 **Static variables kis memory mein store hote hain?**
   - 👉 JVM ke Method Area mein store hote hain — ek hi copy hoti hai poore class ke liye.
   
-  🔹 Kya static variables override hote hain inheritance mein?
+  🔹 **Kya static variables override hote hain inheritance mein?**
   - 👉 Override nahi hote — static variables class-level hote hain, object se nahi. Agar subclass mein same naam ka static variable declare karo, toh woh hide karta hai, override nahi.
   
-  🔹 `static final` ka kya matlab hai?
+  🔹 **`static final` ka kya matlab hai?**
   - 👉 `static` matlab ki sab object ke liye same value
   - `final`, ek baar assign hone ke baad uski value change nahi kar sakte.
 
-  🔹 Static variable thread-safe hota hai kya?
+  🔹 **Static variable thread-safe hota hai kya?**
   - 👉 **Nahi**, kyuki har thread agar change kare toh **race-condition**
 
 <br> 
@@ -773,18 +774,3 @@ Toh:
 
 🔹 **Can you use both super() and this() in same constructor?**
   > No
-
-
-
-
-
-
-
-
-<br>
-<br>
-<br>
-Go to topic 
-heap data structure -> final keyword -> super keyword
-
-abstraction -> access modifier
