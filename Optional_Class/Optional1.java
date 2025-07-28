@@ -1,3 +1,5 @@
+//ofNullable tried, tried to print a string first by making it empty
+
 import java.util.Optional;
 
 public class Optional1 {
