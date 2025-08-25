@@ -1,3 +1,5 @@
+package Milestone1;
+
 public class NumberOfDigits {
     public static void main(String[] args) {
         int numOG = 12345;
